@@ -23,7 +23,7 @@ Esse programa tem como objetivo principal aplicar tecnicas de controle de clock 
 ###### Para realização da simulação
 * Clone o repositório
   ```bash
-   git clone https://github.com/SEU_REPOSITORI.git](https://github.com/Vitorhugofsousa/EbTech-U4C5_01.git
+   git clone https://github.com/Vitorhugofsousa/EbTech-U4C5_01.git
 
 * Faça a compilação do projeto
 * Selecione o arquivo __diagram.json__
@@ -31,5 +31,42 @@ Esse programa tem como objetivo principal aplicar tecnicas de controle de clock 
 
  Em seguida o código entrará no modo de simulação e poderá ver o programa funcionando
 
+ #### Observações
+ A efeito de exemplo e simulação, o Led __Azul__ da placa BitDogLab foi utilizado como __led Amarelo__, mas para que a exibição do semáforo seja feita corretamente com a luz amarela na placa de desenvolvimento é necessário substituir o seguinte trecho do código no arquivo _"EBTECH_U4C5.c"_: 
+```c
+    switch (estado_semaforo) {  // 0 - Vermelho, 1 - Azul, 2 - Verde
+        case 0:
+            gpio_put(LED_PIN_YELLOW, 1);
+            estado_semaforo = 1;
+            break;
+        case 1:
+            gpio_put(LED_PIN_GREEN, 1);
+            estado_semaforo = 2;
+            break;
+        case 2:
+            gpio_put(LED_PIN_RED, 1);
+            estado_semaforo = 0;
+            break;
+    }
+```
+##### Pelo seguinte trecho de código:
+```c
+switch (estado_semaforo) {  // 0 - Vermelho, 1 - Amarelo, 2 - Verde
+        case 0:
+            gpio_put(LED_PIN_GREEN, 1);
+            gpio_put(LED_PIN_RED, 1);
+            estado_semaforo = 1;
+            break;
+        case 1:
+            gpio_put(LED_PIN_GREEN, 1);
+            estado_semaforo = 2;
+            break;
+        case 2:
+            gpio_put(LED_PIN_RED, 1);
+            estado_semaforo = 0;
+            break;
+    }
+```
+Com isso, a exibição das cores será feita corretamente na placa de desenvolvimento.
  # Contribuições
 <img src="semaforo_readme.png">
