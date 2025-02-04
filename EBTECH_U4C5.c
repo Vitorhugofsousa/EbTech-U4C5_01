@@ -5,7 +5,7 @@
 
 //definindo os pinos dos leds
 #define LED_PIN_RED 13
-#define LED_PIN_BLUE 12
+#define LED_PIN_YELLOW 12
 #define LED_PIN_GREEN 11
 
 //definindo a função de callback
@@ -13,7 +13,7 @@ bool callback_timer(struct repeating_timer *t) {
     printf("Mudança de Cor\n");
     //desligando todos os leds
     gpio_put(LED_PIN_RED, 0);
-    gpio_put(LED_PIN_BLUE, 0);
+    gpio_put(LED_PIN_YELLOW, 0);
     gpio_put(LED_PIN_GREEN, 0);
 
 //definindo o estado do semáforo
@@ -22,7 +22,7 @@ static int estado_semaforo = 0;
     //verificando o estado do semáforo
     switch (estado_semaforo) {  // 0 - Vermelho, 1 - Azul, 2 - Verde
         case 0:
-            gpio_put(LED_PIN_BLUE, 1);
+            gpio_put(LED_PIN_YELLOW, 1);
             estado_semaforo = 1;
             break;
         case 1:
@@ -43,8 +43,8 @@ int main(){
     stdio_init_all();
     gpio_init(LED_PIN_GREEN);
     gpio_set_dir(LED_PIN_GREEN, GPIO_OUT);
-    gpio_init(LED_PIN_BLUE);
-    gpio_set_dir(LED_PIN_BLUE, GPIO_OUT);
+    gpio_init(LED_PIN_YELLOW);
+    gpio_set_dir(LED_PIN_YELLOW, GPIO_OUT);
     gpio_init(LED_PIN_RED);
     gpio_set_dir(LED_PIN_RED, GPIO_OUT);
 
